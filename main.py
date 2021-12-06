@@ -19,7 +19,6 @@ from activite import *
 #time.sleep(2)
 #setText("coucou")
 #offLED(4)
-demarrer()
 choixMenu()
 
 #for c in range(0,200):
