@@ -98,3 +98,14 @@ def getDegrees():
     degrees = round((voltage * full_angle) / grove_vcc, 2)
     print("degres : ", degrees)
     return degrees
+
+
+def getIndice(taille):
+    degres = getDegrees()
+    retourIndice = 0
+    for i in range(taille):
+        if (((299/taille) * (i+1)) >= degres and ((299/taille) * (i)) < degres):
+            retourIndice = i
+            break
+    return retourIndice
+        
