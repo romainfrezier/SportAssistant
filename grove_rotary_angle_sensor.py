@@ -90,13 +90,13 @@ while True:
 
 
 def getDegrees():
-    print("lire potentiomettre")
+    #print("lire potentiomettre")
     sensor_value = grovepi.analogRead(potentiometer)
     # Calculate voltage
     voltage = round((float)(sensor_value) * adc_ref / 1023, 2)
     # Calculate rotation in degrees (0 to 300)
     degrees = round((voltage * full_angle) / grove_vcc, 2)
-    print("degres : ", degrees)
+    #print("degres : ", degrees)
     return degrees
 
 

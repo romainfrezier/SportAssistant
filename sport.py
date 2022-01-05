@@ -5,10 +5,16 @@ from grove_rotary_angle_sensor import *
 from button import *
 from LED import *
 from buzzer import *
+from database import *
 
 
 initLED(2)
 initbuzzer(8)
+
+def buzzer():
+    onbuzzer(8)
+    time.sleep(0.2)
+    offbuzzer(8)
 
 
 def chosirNombre(nom):
@@ -47,18 +53,12 @@ def exerciceSerie(nom,repet,distanceCapteur):
                 setText(str(repetAFaire) + " " + nom + "s")
             else:
                 setText(str(repetAFaire) + " " + nom)
-            onbuzzer(8)
-            time.sleep(0.2)
-            offbuzzer(8)
+            buzzer()
             time.sleep(0.9)
         if (repetAFaire == 0):
-            onbuzzer(8)
+            buzzer()
             time.sleep(0.2)
-            offbuzzer(8)
-            time.sleep(0.2)
-            onbuzzer(8)
-            time.sleep(0.2)
-            offbuzzer(8)
+            buzzer()
             break
         time.sleep(0.1)
     return 1
@@ -90,13 +90,9 @@ def exerciceGainage(nom,temps,distanceCapteurMax,distanceCapteurMin):
                 setText(etat)
                 onLED(2)
         if (secondeRestante == 0):
-            onbuzzer(8)
+            buzzer()
             time.sleep(0.2)
-            offbuzzer(8)
-            time.sleep(0.2)
-            onbuzzer(8)
-            time.sleep(0.2)
-            offbuzzer(8)
+            buzzer()
             break
         
 
@@ -113,31 +109,41 @@ def repos(temps):
 
 
 def pompes(repet=0):
+    time.sleep(0.1)
     if (repet == 0):
         repet = chosirNombre("repetition")
     exerciceSerie("pompe",repet,20)
+    updateStat("pompes", repet)
     return 1
 
 def squats(repet=0):
+    time.sleep(0.1)
     if (repet == 0):
         repet = chosirNombre("repetition")
     exerciceSerie("squat",repet,50)
+    updateStat("squats", repet)
     return 1
 
 def dips(repet=0):
+    time.sleep(0.1)
     if (repet == 0):
         repet = chosirNombre("repetition")
     exerciceSerie("dip",repet,10)
+    updateStat("dips", repet)
     return 1
 
-def gaignage(temps=0):
+def gainage(temps=0):
+    time.sleep(0.1)
     if (temps == 0):
         temps = chosirNombre("seconde")
     exerciceGainage("gainage",temps,20,5)
+    updateStat("gainage", temps)
     return 1
 
 def chaise(temps=0):
+    time.sleep(0.1)
     if (temps == 0):
         temps = chosirNombre("seconde")
     exerciceGainage("chaise",temps,70,50)
+    updateStat("chaise", temps)
     return 1
