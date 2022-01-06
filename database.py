@@ -7,16 +7,17 @@ default_app = firebase_admin.initialize_app(cred, {
 	})
 ref = db.reference("/")
 
-
+# Fonction pour récupérer les programmes sur la base de données
 def getProgrammes():
     programmes = db.reference("/Programmes").get()
     return programmes
 
+# Fonction pour récupérer les statistiques sur la base de données
 def getStats():
     stats = db.reference("/Stats").get()
     return stats
 
-
+# Fonction pour mettre a jour les statistiques sur la base de données
 def updateStat(nom,nombre):
     ref = db.reference("/Stats")
     stats = ref.get()

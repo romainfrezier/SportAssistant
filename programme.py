@@ -2,7 +2,7 @@ from time import *
 from menu import *
 from sport import *
 
-
+# Dictionnaire des exercices disponibles
 map_exercices = {
     "pompes" : pompes,
     "dips" : dips,
@@ -12,15 +12,15 @@ map_exercices = {
     "repos" : repos
 }
 
+# Fonction du programme personalisé
 def personnalise(programme):
-    for exercice in programme:
-        print("exercice : " , exercice)
-        for i in range(exercice["nbSerie"]):
+    for exercice in programme: # pour chaque exercice du programme personalisé...
+        for i in range(exercice["nbSerie"]): # ...on fait un certain nombre de série...
             values = list(exercice.values())
-            print("values : ", values)
-            map_exercices[exercice["nom"]](values[2])
+            map_exercices[exercice["nom"]](values[2]) # ...de cet exercice
     return 1
 
+# Fonction du programme pour sportif débutant, de base dans la rasp
 def debutant():
     for i in range(0,3):
         pompes(5)
@@ -39,6 +39,7 @@ def debutant():
         repos(30)
     return 1
 
+# Fonction du programme pour sportif de niveau intermédiaire, de base dans la rasp
 def intermediaire():
     for i in range(0,3):
         pompes(10)
@@ -57,6 +58,7 @@ def intermediaire():
         repos(45)
     return 1
 
+# Fonction du programme pour sportif de niveau avancé, de base dans la rasp
 def avance():
     for i in range(0,3):
         pompes(15)

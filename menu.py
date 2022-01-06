@@ -8,16 +8,7 @@ from LED import *
 from database import *
 import time
 
-
-programmes = getProgrammes()
-stats = getStats()
-optionProgrammesPersos = {}
-keyOptionProgrammesPersos = list(optionProgrammesPersos.keys())
-valueOptionProgrammePersos = list(optionProgrammesPersos.values())
-optionStats = {}
-keyOptionStats = list(optionStats.keys())
-valueOptionStats = list(optionStats.values())
-
+# Fonction pour récupérer les programmes personnalisés sur la base de données
 def getProgrammePerso(nom):
     programmeChoisi = {}
     for programme in programmes:
@@ -26,11 +17,13 @@ def getProgrammePerso(nom):
             break
     return programmeChoisi
 
+# Fonction pour lancer un programme personalisé
 def programmePerso(nom):
     programme = getProgrammePerso(nom)
     personnalise(programme)
-    demarrer()
+    choixMenu()
 
+# Charge les programmes personalisés dans la rasp
 def updateProgrammesPersos():
     global programmes
     global optionProgrammesPersos
@@ -41,11 +34,11 @@ def updateProgrammesPersos():
     for programme in programmes:
         values = list(programme.values())
         listeProgrammes[values[1]] = programmePerso
-        print(programme)
-    optionProgrammesPersos = listeProgrammes
-    keyOptionProgrammesPersos = list(optionProgrammesPersos.keys())
-    valueOptionProgrammePersos = list(optionProgrammesPersos.values())
+    optionProgrammesPersos = listeProgrammes # Copie du dictionnnaire des programmes personalisés
+    keyOptionProgrammesPersos = list(optionProgrammesPersos.keys()) # Liste des clés du dictionnaire de programmes personalisés
+    valueOptionProgrammePersos = list(optionProgrammesPersos.values()) # Liste des valeurs du dictionnaire de programmes personalisés
 
+# Charge les programmes personalisés dans la rasp
 def updateStats():
     global stats
     global optionStats
@@ -57,92 +50,100 @@ def updateStats():
         values = list(stat.values())
         chaine = ""
         if (values[2] == 'repet'):
-            chaine = str(values[1]) + " " + str(values[0])
+            chaine = str(values[1]) + " " + str(values[0]) # 1 -> nombre de répétitions ; 0 -> nom
         else:
-            chaine = str(values[1]) + " secondes de " + str(values[0])
-        listeStats[chaine] = demarrer
-        print(stats)
-    optionStats = listeStats
-    keyOptionStats = list(optionStats.keys())
-    valueOptionStats = list(optionStats.values())
+            chaine = str(values[1]) + " secondes de " + str(values[0]) # 1 -> nombre de secondes ; 0 -> nom
+        listeStats[chaine] = choixMenu # Retour a menu principal
+    optionStats = listeStats # Copie du dictionnnaire des statistiques
+    keyOptionStats = list(optionStats.keys()) # Liste des clés du dictionnaire de statistiques
+    valueOptionStats = list(optionStats.values()) # Liste des valeurs du dictionnaire de statistiques
 
 updateProgrammesPersos()
 
+# Fonction pour naviguer dans le menu des programmes personalisés
 def programmesPersomenu():
     updateProgrammesPersos()
     time.sleep(0.1)
     potentiometre(optionProgrammesPersos,keyOptionProgrammesPersos,valueOptionProgrammePersos)
     return 1
 
+# Fonction pour naviguer dans le menu des statistiques
 def statsMenu():
     updateStats()
     time.sleep(0.1)
     potentiometre(optionStats,keyOptionStats,valueOptionStats)
     return 1
 
-def demarrer():
+# Fonction pour naviguer dans le menu principal
+def choixMenu():
     time.sleep(0.1)
-    potentiometre(option2,keyOption2,valueOption2)
+    print("Menu Général")
+    potentiometre(optionGeneral,keyOptionGeneral,valueOptionGeneral)
     return 1
 
+# Fonction pour naviguer dans le menu des séries
 def serie():
     time.sleep(0.1)
     potentiometre(optionSport,keyOptionSport,valueOptionSport)
-    demarrer()
+    choixMenu()
     return 1
 
+# Fonction pour naviguer dans le menu des programmes
 def programme():
     time.sleep(0.1)
     potentiometre(programme,keyProgramme,valueProgramme)
-    demarrer()
+    choixMenu()
     return 1
 
-def pause():
-    return 1
-
-
+# Fonction pour utiliser le potentiomètre dans la navigation des menus
 def potentiometre(menu,keys,values):
     global indexChoix
     indexChoix = 0
     setText(keys[0])
     indiceEnCours = 0
     while True:
-        indiceEnCours = getIndice(len(menu))
-        #print("indiceEnCours =  " + str(indiceEnCours))
+        indiceEnCours = getIndice(len(menu)) 
         if (indiceEnCours != indexChoix):
             indexChoix = indiceEnCours       
             setText(keys[indexChoix])
         value = readButton(3)
         time.sleep(.05)
-        #print(value)
-        if (value == 1):
-            #print("bouton ok")
+        if (value == 1): # si le bouton a été utilisé, c'est qu'on a choisi une option
             if (values[indexChoix] == programmePerso):
-                print(keys[indexChoix])
                 setText(keys[indexChoix])
                 values[indexChoix](keys[indexChoix])
             else:
-                print(keys[indexChoix])
                 setText(keys[indexChoix])
                 values[indexChoix]()
             break
 
+programmes = getProgrammes()
+stats = getStats()
 
+# Partie menu général
+optionGeneral = {"Programmes" : programme, "Programmes perso" : programmesPersomenu, "Serie" : serie , "Statistiques" : statsMenu}
+keyOptionGeneral = list(optionGeneral.keys())
+valueOptionGeneral = list(optionGeneral.values())
 
-
-option2 = {"Programmes" : programme, "Programmes perso" : programmesPersomenu, "Serie" : serie , "Statistiques" : statsMenu}
-keyOption2 = list(option2.keys())
-valueOption2 = list(option2.values())
+# Partie exercice
 optionSport = {"Pompes" : pompes, "Squat" : squats, "Dips" : dips, "Gainage" : gainage, "Chaise" : chaise}
 keyOptionSport = list(optionSport.keys())
 valueOptionSport = list(optionSport.values())
+
+# Partie programme
 programme = {"Debutant" : debutant, "Intermediaire" : intermediaire, "Avance" : avance}
 keyProgramme = list(programme.keys())
 valueProgramme = list(programme.values())
+
+# Partie programme personalisé
+optionProgrammesPersos = {}
+keyOptionProgrammesPersos = list(optionProgrammesPersos.keys())
+valueOptionProgrammePersos = list(optionProgrammesPersos.values())
+
+# Partie stats
+optionStats = {}
+keyOptionStats = list(optionStats.keys())
+valueOptionStats = list(optionStats.values())
+
+# Le premier élément est afficher a l'arriver sur un menu
 indexChoix = 0
-
-
-
-def choixMenu():
-    time.sleep(0.5)
-    demarrer()

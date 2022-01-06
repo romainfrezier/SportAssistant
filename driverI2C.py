@@ -56,4 +56,3 @@ def setText(texte):
 		bus.write_byte_data(DISPLAY_TEXT_ADDR,0x40,ord(texte[i]))
 		count += 1
 		time.sleep(0.01)
-	print ("texte ecrit")
