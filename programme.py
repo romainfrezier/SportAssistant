@@ -14,10 +14,14 @@ map_exercices = {
 
 # Fonction du programme personalisé
 def personnalise(programme):
+    print(programme)
     for exercice in programme: # pour chaque exercice du programme personalisé...
-        for i in range(exercice["nbSerie"]): # ...on fait un certain nombre de série...
+        for i in range(int(exercice["nbSerie"])): # ...on fait un certain nombre de série...
             values = list(exercice.values())
             map_exercices[exercice["nom"]](values[2]) # ...de cet exercice
+    time.sleep(0.5)
+    setText("Bravo")
+    time.sleep(2)
     return 1
 
 # Fonction du programme pour sportif débutant, de base dans la rasp
@@ -37,6 +41,9 @@ def debutant():
     for i in range(0,3):
         chaise(20)
         repos(30)
+    time.sleep(0.5)
+    setText("Bravo")
+    time.sleep(2)
     return 1
 
 # Fonction du programme pour sportif de niveau intermédiaire, de base dans la rasp
@@ -56,6 +63,9 @@ def intermediaire():
     for i in range(0,3):
         chaise(35)
         repos(45)
+    time.sleep(0.5)
+    setText("Bravo")
+    time.sleep(2)
     return 1
 
 # Fonction du programme pour sportif de niveau avancé, de base dans la rasp
@@ -75,4 +85,7 @@ def avance():
     for i in range(0,3):
         chaise(45)
         repos(45)
+    time.sleep(0.5)
+    setText("Bravo")
+    time.sleep(2)
     return 1

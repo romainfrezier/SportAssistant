@@ -8,10 +8,17 @@ from LED import *
 from database import *
 import time
 
+# Fonction pour naviguer dans le menu principal
+def choixMenu():
+    time.sleep(0.1)
+    print("Menu Général")
+    potentiometre(optionGeneral,keyOptionGeneral,valueOptionGeneral)
+    return 1
+
 # Fonction pour récupérer les programmes personnalisés sur la base de données
 def getProgrammePerso(nom):
     programmeChoisi = {}
-    for programme in programmes:
+    for programme in programmes.values():
         if programme["Nom"] == nom:
             programmeChoisi = programme["Exercices"]
             break
@@ -30,8 +37,10 @@ def updateProgrammesPersos():
     global keyOptionProgrammesPersos
     global valueOptionProgrammePersos
     programmes = getProgrammes()
-    listeProgrammes = {}
-    for programme in programmes:
+    listeProgrammes = {"Menu General" : choixMenu}
+    print(programmes, "\n")
+    for programme in programmes.values():
+        print('le programme en cours', list(programme))
         values = list(programme.values())
         listeProgrammes[values[1]] = programmePerso
     optionProgrammesPersos = listeProgrammes # Copie du dictionnnaire des programmes personalisés
@@ -72,13 +81,6 @@ def statsMenu():
     updateStats()
     time.sleep(0.1)
     potentiometre(optionStats,keyOptionStats,valueOptionStats)
-    return 1
-
-# Fonction pour naviguer dans le menu principal
-def choixMenu():
-    time.sleep(0.1)
-    print("Menu Général")
-    potentiometre(optionGeneral,keyOptionGeneral,valueOptionGeneral)
     return 1
 
 # Fonction pour naviguer dans le menu des séries
@@ -126,12 +128,12 @@ keyOptionGeneral = list(optionGeneral.keys())
 valueOptionGeneral = list(optionGeneral.values())
 
 # Partie exercice
-optionSport = {"Pompes" : pompes, "Squat" : squats, "Dips" : dips, "Gainage" : gainage, "Chaise" : chaise}
+optionSport = {"Menu General" : choixMenu, "Pompes" : pompes, "Squat" : squats, "Dips" : dips, "Gainage" : gainage, "Chaise" : chaise}
 keyOptionSport = list(optionSport.keys())
 valueOptionSport = list(optionSport.values())
 
 # Partie programme
-programme = {"Debutant" : debutant, "Intermediaire" : intermediaire, "Avance" : avance}
+programme = {"Menu General" : choixMenu, "Debutant" : debutant, "Intermediaire" : intermediaire, "Avance" : avance}
 keyProgramme = list(programme.keys())
 valueProgramme = list(programme.values())
 

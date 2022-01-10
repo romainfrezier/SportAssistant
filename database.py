@@ -23,7 +23,7 @@ def updateStat(nom,nombre):
     stats = ref.get()
     for i in range(len(stats)):
         if(stats[i]["nom"] == nom):
-            nombreUpdate = stats[i]["nombre"] + nombre
+            nombreUpdate = int(stats[i]["nombre"]) + int(nombre)
             ref.child(str(i)).update({"nombre" : nombreUpdate})
 
 

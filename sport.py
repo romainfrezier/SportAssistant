@@ -46,7 +46,9 @@ def chosirNombre(nom):
 #   - nombre de repetition : int
 #   - distance de validation de la répétition : int
 def exerciceSerie(nom,repet,distanceCapteur):
-    repetAFaire = repet 
+    setText("Pret ?")
+    time.sleep(5)
+    repetAFaire = int(repet)
     setText(str(repetAFaire) + " " + nom + "s")
     while True:
         distance = readValueUltraSonic()
@@ -74,9 +76,11 @@ def exerciceSerie(nom,repet,distanceCapteur):
 #   - distance de maintient maximum : int
 #   - distance de maintient minimum : int
 def exerciceGainage(nom,temps,distanceCapteurMax,distanceCapteurMin):
-    secondeRestante = temps
+    setText("Pret ?")
+    time.sleep(5)
+    secondeRestante = int(temps)
     etat = "ok"
-    setText(str(secondeRestante) + " secondes de " + nom)
+    setText(str(secondeRestante) + " secondes de   " + nom)
     while True:
         distance = readValueUltraSonic()
         print(distance)
@@ -85,9 +89,9 @@ def exerciceGainage(nom,temps,distanceCapteurMax,distanceCapteurMin):
             offLED(2)
             secondeRestante -= 1
             if (secondeRestante > 1):
-                setText(str(secondeRestante) + " secondes de " + nom)
+                setText(str(secondeRestante) + " secondes de   " + nom)
             else:
-                setText(str(secondeRestante) + " seconde de " + nom)
+                setText(str(secondeRestante) + " seconde de    " + nom)
             time.sleep(1)
         elif (distance < distanceCapteurMin): # si on est en dessous la tranche de distance alors on doit monter
             if (etat != "Montez !"):
@@ -109,13 +113,13 @@ def exerciceGainage(nom,temps,distanceCapteurMax,distanceCapteurMin):
         
 # Fonction de temporisation entre deux séries
 def repos(temps):
-    tempsRestant = temps
+    tempsRestant = int(temps)
     while tempsRestant > 0:
         # On affiche le nombre de seconde restante avec ou sans "s"
         if (tempsRestant > 1):
-            setText("Repos restant " + str(tempsRestant) + " secondes")
+            setText("Repos restant " + str(tempsRestant) + "   secondes")
         else:
-            setText("Repos restant " + str(tempsRestant) + " seconde")
+            setText("Repos restant " + str(tempsRestant) + "   seconde")
         tempsRestant -= 1
         time.sleep(1)
     return 1
