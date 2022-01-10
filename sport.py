@@ -41,10 +41,6 @@ def chosirNombre(nom):
     return nombreRep
 
 # Fonction pour un exercice de type répétition
-# Entrée :
-#   - nom de l'exercice : str
-#   - nombre de repetition : int
-#   - distance de validation de la répétition : int
 def exerciceSerie(nom,repet,distanceCapteur):
     setText("Pret ?")
     time.sleep(5)
@@ -70,11 +66,6 @@ def exerciceSerie(nom,repet,distanceCapteur):
     return 1
 
 # Fonction pour un exercice de type répétition
-# Entrée :
-#   - nom de l'exercice : str
-#   - nombre de secondes : int
-#   - distance de maintient maximum : int
-#   - distance de maintient minimum : int
 def exerciceGainage(nom,temps,distanceCapteurMax,distanceCapteurMin):
     setText("Pret ?")
     time.sleep(5)
@@ -133,6 +124,7 @@ def pompes(repet=0):
     updateStat("pompes", repet) # On met a jour les stats sur les pompes
     return 1
 
+# Fonction pour faire des squats
 def squats(repet=0):
     time.sleep(0.1)
     if (repet == 0):
@@ -141,6 +133,7 @@ def squats(repet=0):
     updateStat("squats", repet) # On met a jour les stats sur les squats
     return 1
 
+# Fonction pour faire des dips
 def dips(repet=0):
     time.sleep(0.1)
     if (repet == 0):
@@ -149,6 +142,7 @@ def dips(repet=0):
     updateStat("dips", repet) # On met a jour les stats sur les dips
     return 1
 
+# Fonction pour faire du gainage
 def gainage(temps=0):
     time.sleep(0.1)
     if (temps == 0):
@@ -157,6 +151,7 @@ def gainage(temps=0):
     updateStat("gainage", temps) # On met a jour les stats sur le gainage
     return 1
 
+# Fonction pour faire de la chaise
 def chaise(temps=0):
     time.sleep(0.1)
     if (temps == 0):

@@ -47,7 +47,7 @@ def updateProgrammesPersos():
     keyOptionProgrammesPersos = list(optionProgrammesPersos.keys()) # Liste des clés du dictionnaire de programmes personalisés
     valueOptionProgrammePersos = list(optionProgrammesPersos.values()) # Liste des valeurs du dictionnaire de programmes personalisés
 
-# Charge les programmes personalisés dans la rasp
+# Charge les stats dans la rasp
 def updateStats():
     global stats
     global optionStats

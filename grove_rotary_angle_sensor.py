@@ -99,12 +99,14 @@ def getDegrees():
     #print("degres : ", degrees)
     return degrees
 
-
+# Fonction pour récupérer un indice associer a un degrés en fonction de la taille du menu
 def getIndice(taille):
     degres = getDegrees()
     retourIndice = 0
     for i in range(taille):
+        # On découpe la tranche de 300° en `taille` partie
         if (((299/taille) * (i+1)) >= degres and ((299/taille) * (i)) < degres):
+            # On associe l'indice a la bonne tranche
             retourIndice = i
             break
     return retourIndice
