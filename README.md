@@ -15,4 +15,4 @@ _____
 
 _____
 Lien du repo github contenant le site web utilisé comme interface pour notre assisstant sportif :
-https://github.com/romainfrz/siteRasp
+https://github.com/romainfrezier/siteRasp
